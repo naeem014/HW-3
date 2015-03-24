@@ -7,7 +7,6 @@ class MoviesController < ApplicationController
   def sort
     @movies = Movie.all
     action = params[:sort_by]
-    flash[:notice] = "parameter is #{action}"
   end
   def show
     id = params[:id] # retrieve movie ID from URI route

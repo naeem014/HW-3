@@ -2,8 +2,7 @@
 %h1 All Movies
 
 %option = {:sort_by=>"title"}
-= link_to "Sort Movies", action: "index", id: "title_header"
-<a href="/movies#index option">sort</a>
+= link_to "Sort Movies", controller = "movies/index.html.haml?:sort_by=>'title'", action: "sort"
 
 %table#movies
   %thead
