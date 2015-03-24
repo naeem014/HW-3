@@ -3,7 +3,7 @@
 
 %option = {:sort_by=>"title"}
 = link_to "Sort Movies", action: "index", id: "title_header"
-<a href="/movies#index?:sort_by=>'title'">sort</a>
+<a href="/movies#index option">sort</a>
 
 %table#movies
   %thead
