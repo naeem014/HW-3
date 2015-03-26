@@ -3,17 +3,15 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    @my_class
     id = params[:sort_by]
     if id === "title"
         @movies.sort_by!{|m| [m.title]}
+        @my_class = "hilite"
     elsif id === "date"
 	@movies.sort_by!{|m| [m.release_date]}
-	flash[:notice] = "#{id}"	
+        @my_class = "hilite"	
     end
-  end
-  
-  def sort
-    flash[:notice] = "yes"
   end
 
   def show

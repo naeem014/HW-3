@@ -6,8 +6,10 @@ class MoviesController < ApplicationController
     id = params[:sort_by]
     if id === "title"
         @movies.sort_by!{|m| [m.title]}
+        @title_class = "hilite"
     elsif id === "date"
-	@movies.sort_by!{|m| [m.release_date]}	
+	@movies.sort_by!{|m| [m.release_date]}
+        @date_class = "hilite"	
     end
   end
 

@@ -50,7 +50,7 @@ table#movies th {
 table#movies th.hilite {
   border: 2px solid white;
   font-weight: bold;
-  background-color: silver;
+  background-color: yellow;
 }
 
 
