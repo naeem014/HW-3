@@ -3,14 +3,14 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
-    @my_class
+    @all_ratings
     id = params[:sort_by]
     if id === "title"
         @movies.sort_by!{|m| [m.title]}
-        @my_class = "hilite"
+        @title_class = "hilite"
     elsif id === "date"
 	@movies.sort_by!{|m| [m.release_date]}
-        @my_class = "hilite"	
+        @date_class = "hilite"	
     end
   end
 

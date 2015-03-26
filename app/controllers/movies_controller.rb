@@ -3,6 +3,7 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    @all_ratings = []
     id = params[:sort_by]
     if id === "title"
         @movies.sort_by!{|m| [m.title]}
