@@ -1,15 +1,12 @@
 -# This file is app/view/movies/index.html.haml
 %h1 All Movies
 
-%option = {:sort_by=>"title"}
-= link_to "Sort Movies", controller = "movies/index.html.haml?:sort_by=>'title'", action: "sort"
-
 %table#movies
   %thead
     %tr
-      %th Movie Title
+      %th= link_to "Movie Title", controller= "movies?sort_by=title", action: "index"
       %th Rating
-      %th Release Date
+      %th= link_to "Release Date"
       %th More Info
   %tbody
     - @movies.each do |movie|

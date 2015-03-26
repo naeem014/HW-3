@@ -3,12 +3,14 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    id = params[:sort_by]
+    if id === "title"
+        @movies.sort_by!{|m| [m.title]}
+    elsif id === "date"
+	@movies.sort_by!{|m| [m.release_date]}	
     end
-  def sort
-    @movies = Movie.all
-    action = params[:sort_by]
-    flash[:notice] = "parameter is #{action}"
   end
+
   def show
     id = params[:id] # retrieve movie ID from URI route
     @movie = Movie.find(id) # Look up movie by unique ID
@@ -30,7 +32,7 @@ class MoviesController < ApplicationController
   end
 
   def update
-    @movie = Movie.find params[:id]
+   @movie = Movie.find params[:id]
     @movie.update_attributes!(params[:movie])
     flash[:notice] = "#{@movie.title} was successfully updated."
     redirect_to movie_path(@movie)
