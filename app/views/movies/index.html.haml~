@@ -2,11 +2,12 @@
 %h1 All Movies
 
 = form_tag movies_path, :method => :get do
+  = hidden_tag_field "hid", :flag=>true  
   Include:
   - @all_ratings.each_key do |rating|
     = rating
     = check_box_tag "ratings[#{rating}]", "yes", @all_ratings.fetch(rating), id: "ratings_#{rating}"
-  = submit_tag 'Refresh', id=> "ratings_submit"
+  = submit_tag 'Refresh', id: "ratings_submit"
 
 %table#movies
   %thead

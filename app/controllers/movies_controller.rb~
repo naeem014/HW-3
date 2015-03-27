@@ -4,8 +4,10 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
     @all_ratings = Movie.first.rate
-    rate_spec = params[:ratings]
+     rate_spec = params[:ratings]
     rate_options = Array.new()
+    
+    # the ratings operations are done here
     if rate_spec != nil
       rate_spec.each_key{|k| rate_options << k}
       new_hash = {}
@@ -16,19 +18,21 @@ class MoviesController < ApplicationController
 	  new_hash[key] = false
         end
       end
-      @all_ratings.replace(new_hash)	 
-      flash[:notice] = "#{@all_ratings}"	
-      @movies.select!{|m| rate_options.include?(m.rating)}
+      @all_ratings.replace(new_hash)
 
-    end     
-    id = params[:sort_by]
-    if id === "title"
+     # select movies according to ratings		
+        @movies.select!{|m| rate_options.include?(m.rating)}
+    end
+
+    # sort the movies accordingly
+      id = params[:sort_by]
+      if id === "title" || session[:sort_by] === "title"
         @movies.sort_by!{|m| [m.title]}
         @title_class = "hilite"
-    elsif id === "date"
+      elsif id === "date" || session[:sort_by] === "date"
 	@movies.sort_by!{|m| [m.release_date]}
         @date_class = "hilite"	
-    end
+      end
   end
 
   def show
