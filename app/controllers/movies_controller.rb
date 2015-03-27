@@ -3,7 +3,13 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
-    @all_ratings = []
+    @all_ratings = Movie.first.rate
+    rate_spec = params[:ratings]
+    rate_options = Array.new()
+    if rate_spec != nil
+      rate_spec.each_key{|k| rate_options << k}
+      @movies.select!{|m| rate_options.include?(m.rating)}
+    end     
     id = params[:sort_by]
     if id === "title"
         @movies.sort_by!{|m| [m.title]}
