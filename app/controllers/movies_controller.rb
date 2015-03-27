@@ -6,10 +6,25 @@ class MoviesController < ApplicationController
     @all_ratings = Movie.first.rate
     rate_spec = params[:ratings]
     rate_options = Array.new()
+    
+    # the ratings operations are done here
     if rate_spec != nil
       rate_spec.each_key{|k| rate_options << k}
+      new_hash = {}
+      @all_ratings.each_key do |key|
+        if(rate_options.include?(key))
+          new_hash[key] = true
+        else
+	  new_hash[key] = false
+        end
+      end
+      @all_ratings.replace(new_hash)
+
+     # select movies according to ratings		
       @movies.select!{|m| rate_options.include?(m.rating)}
-    end     
+    end
+
+    # sort the movies accordingly	     
     id = params[:sort_by]
     if id === "title"
         @movies.sort_by!{|m| [m.title]}
